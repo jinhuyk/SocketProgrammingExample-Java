@@ -16,7 +16,6 @@ import java.net.UnknownHostException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -38,11 +37,11 @@ public class ChatClient extends JDialog implements ActionListener{
 	boolean flag = true;
 	MyClientThread th =null;
 	
-	public ChatClient() {
-		
-
+	public ChatClient(ChatMain parent,String userid) {
+		super(parent,userid,true);
+		this.userid = userid;
 		this.setSize(500,500);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		init();
 		initWindowListener();
@@ -65,6 +64,7 @@ public class ChatClient extends JDialog implements ActionListener{
 			if(th.isAlive()) {
 				th.writer.println("!@#$%^&*()");
 				flag = false;
+				dispose();
 			}
 		});
 	}
@@ -75,9 +75,6 @@ public class ChatClient extends JDialog implements ActionListener{
 			@Override
 			public void windowOpened(WindowEvent e) {
 				// TODO Auto-generated method stub
-				super.windowOpened(e);
-				userid = JOptionPane.showInputDialog("Your Id? ");
-				ChatClient.this.setTitle(userid);
 				connectServer();
 			}
 
@@ -87,6 +84,7 @@ public class ChatClient extends JDialog implements ActionListener{
 				super.windowClosing(e);
 				th.writer.println("!@#$%^&*()");
 				flag = false;
+				dispose();
 				
 			}
 			
@@ -136,10 +134,6 @@ public class ChatClient extends JDialog implements ActionListener{
 			}
 		}
 		
-	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ChatClient client = new ChatClient();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

@@ -20,19 +20,13 @@ class User{
 		this.reader = reader;
 		this.writer = writer;
 	}
-	
-	
-	
+
 }
-
-
 public class ChatServer {
-
 	HashMap<String, User> clients = new HashMap<>();
 	// client save
 	ServerSocket server = null;
-	
-	
+
 	public ChatServer(int port) {
 		
 		try {
@@ -62,9 +56,7 @@ public class ChatServer {
 				e.printStackTrace();
 			}
 		}
-		
-	
-		
+
 	}
 	
 	class MyThread extends Thread{
@@ -118,10 +110,8 @@ public class ChatServer {
 							
 						}
 					}
-					
 				}
-				
-				
+	
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -135,10 +125,7 @@ public class ChatServer {
 					e.printStackTrace();
 				}
 			}
-			
-			
 		}
-		
 	}
 	
 	public static void main(String[] args) {
